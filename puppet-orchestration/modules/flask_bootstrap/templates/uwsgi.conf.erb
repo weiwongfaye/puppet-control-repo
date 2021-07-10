@@ -1,0 +1,10 @@
+[supervisord]
+
+[program:uwsgi]
+command=/usr/local/bin/uwsgi --ini <%= scope.lookupvar("flask_bootstrap::app_directory") %>/uwsgi.ini
+
+autostart=true
+autorestart=true
+#stderr_logfile = /tmp/uwsgi_err.log
+#stdout_logfile = /tmp/uwsgi_out.log
+stopsignal=INT

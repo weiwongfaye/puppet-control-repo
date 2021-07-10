@@ -1,0 +1,20 @@
+[uwsgi]
+#application's base folder
+base = <%= scope.lookupvar("flask_bootstrap::app_code") %>
+#python module to import
+app = my_app
+module = hello
+#socket file's location
+socket = <%= scope.lookupvar("flask_bootstrap::app_directory") %>/uwsgi.sock
+#permissions for the socket file
+chmod-socket    = 666
+#the variable that holds a flask application inside the module imported at line #6
+callable = app
+
+processes = 4
+
+daemonize = /var/log/uwsgi/<%= scope.lookupvar("flask_bootstrap::app_name") %>.log
+#Log directory
+logto = /var/log/uwsgi/<%= scope.lookupvar("flask_bootstrap::app_name") %>.log
+
+chdir = <%= scope.lookupvar("flask_bootstrap::app_code") %>
